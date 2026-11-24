@@ -1,0 +1,172 @@
+<!doctype html> 
+<html> 
+<head> 
+	<meta charset =	"utf-8"/>  
+ 	<title> Assistenza telefoni </title>
+	<style>
+		body {
+			font-family: Arial;
+		}
+		#modulo {
+			width: 600px;
+			margin: auto;
+			font-weight: bold;
+			}
+		#ricevuta {
+			width: 600px;
+			margin: auto;
+			text-align: center;
+			}
+		h3 {
+			background-color: lightblue;
+			border: 1px solid black;
+			border-bottom: none;
+			padding: 5px;
+			margin: 0px;
+		}
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			text-align: left;
+		}
+		td {
+			border: 1px solid black;
+			padding: 5px;
+			width: 50%;
+		}
+		.risultato {
+			font-family: Arial;
+			width: 100%;
+			border: none;
+		}
+		textarea {
+			font-family: Arial;
+		}
+		.casella {
+			margin-top: 0px;
+			margin-bottom: 2px;
+		}
+		
+		
+		</style>
+</head>
+<body> 
+	 <form id="modulo" name="modulo1">
+		<h2>Centro d'assistenza-Dati del cliente e del dispositivo</h2>
+			
+			Nome<br />
+			<input type="text" name="nome" class="casella"/> <br /><br />
+			Cognome<br />
+			<input type="text" name="cognome" class="casella"/> <br/><br />
+			Codice Fiscale<br />
+			<input type="text" name="cf" maxlength="16" class="casella"/><br /><br />
+			Città<br />
+			<input type="text" name="citta" class="casella"/><br /><br />
+			Operatore telefonico<br />
+			<select name="operatore" class="casella">
+				<option>Vodafone</option>
+				<option>WindTre</option>
+				<option>TIM</option>
+				<option>Iliad</option>
+				<option>HO</option>
+				<option>Tiscali</option>
+				<option>Fastweb</option>
+				<option>Altro</option>
+			</select>
+			<br /><br />
+			Numero di telefono dispositivo<br />
+			<input type="text" name="telefono" class="casella"/><br /><br />
+			Marca dispositivo<br />
+			<input type="text" name="marca" class="casella"/><br /><br />
+			Modello dispositivo<br />
+			<input type="text" name="modello" class="casella"/><br /><br />
+			Breve descrizione del problema<br />
+			<textarea name="problema" rows="5" cols="50" class="casella"></textarea><br /><br />
+			Recapito di contatto (se diverso dal numero di dispositivo in riparazione)<br />
+			<input type="text" name="recapito" class="casella"/><br /><br />
+			
+			<input type="button" id="genera" value="Genera ricevuta"/>
+		</form>
+		
+		<div id="ricevuta" hidden="">
+			<h3>Puntotel - Via Napoli 88, Montesarchio (BN)<br />Ricevuta di consegna</h3>
+			
+			<form name="modulo2">
+				<table>
+					<tr>
+						<td>Nome</td> 
+						<td><input type="text" name="nome" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Cognome</td> 
+						<td><input type="text" name="cognome" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Codice fiscale</td> 
+						<td><input type="text" name="cf" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Città</td> 
+						<td><input type="text" name="citta" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Operatore telefonico</td> 
+						<td><input type="text" name="operatore" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Numero di telefono dispositivo</td> 
+						<td><input type="text" name="telefono" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Marca dispositivo</td> 
+						<td><input type="text" name="marca" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Modello dispositivo</td> 
+						<td><input type="text" name="modello" class="risultato" readonly/></td>
+					</tr>
+					<tr>
+						<td>Breve descrizione del problema</td> 
+						<td><textarea name="problema" rows="5" cols="50" class="risultato" readonly></textarea></td>
+					</tr>
+					<tr>
+						<td>Recapito di contatto (se diverso dal numero del dispositivo in riparazione</td> 
+						<td><input type="text" name="recapito" class="risultato" readonly/></td>
+					</tr>
+				</table>
+			</form>	
+			<br/>
+			<input type="button" id="torna" value="Torna al form"/>
+		</div>
+		
+	<script>
+		document.getElementById("genera").addEventListener("click", function() {
+			document.modulo2.nome.value = document.modulo1.nome.value;	
+			document.modulo2.cognome.value = document.modulo1.cognome.value;
+			document.modulo2.cf.value = document.modulo1.cf.value;
+			document.modulo2.citta.value = document.modulo1.citta.value;
+			document.modulo2.operatore.value = document.modulo1.operatore.value;
+			document.modulo2.telefono.value = document.modulo1.telefono.value;
+			document.modulo2.marca.value = document.modulo1.marca.value;
+			document.modulo2.modello.value = document.modulo1.modello.value;
+			document.modulo2.problema.value = document.modulo1.problema.value;
+			
+			if (document.modulo1.recapito.value == "") {
+				document.modulo2.recapito.value = document.modulo1.telefono.value;
+			} else {
+				document.modulo2.recapito.value = document.modulo1.recapito.value;
+			}
+			
+			document.getElementById("modulo").hidden = true;
+			document.getElementById("ricevuta").hidden = false;
+		});
+		
+		document.getElementById("torna").addEventListener("click", 
+			function() {
+			document.modulo1.reset();
+			document.getElementById("ricevuta").hidden = true;
+			document.getElementById("modulo").hidden = false;
+		});
+	</script>
+</body>
+</html>
